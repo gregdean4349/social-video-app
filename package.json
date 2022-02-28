@@ -12,10 +12,12 @@
     "@tinymce/tinymce-react": "^3.13.0",
     "firebase": "^9.6.7",
     "framer-motion": "^6.2.7",
+    "moment": "^2.29.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-icons": "^4.3.1",
     "react-loader-spinner": "^5.1.4",
+    "react-player": "^2.9.0",
     "react-router-dom": "^6.2.1",
     "react-scripts": "5.0.0",
     "web-vitals": "^2.1.4"

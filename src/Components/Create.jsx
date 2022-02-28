@@ -12,7 +12,7 @@ import { doc, getFirestore, setDoc } from 'firebase/firestore';
 import AlertMsg from './AlertMsg';
 import { Editor } from '@tinymce/tinymce-react';
 import { fetchUser } from '../utils/fetchUser';
-import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const Create = () => {
   const { colorMode } = useColorMode();
@@ -31,13 +31,15 @@ const Create = () => {
   const [alertIcon, setAlertIcon] = useState(null);
   const [description, setDescription] = useState('');
 
+  const navigate = useNavigate();
+
   //* Fetch user information
   const [userInfo] = fetchUser();
 
-  //* FireStoreDb setup
-  const fireStoreDb = getFirestore(firebaseApp);
+  //*  Initialize FireStoreDb
+  const firestoreDb = getFirestore(firebaseApp);
 
-  //* Setup Firebase Storage
+  //* Initialize Firebase Storage
   const storage = getStorage(firebaseApp);
 
   //* Create a firebase Storage instance
@@ -52,6 +54,7 @@ const Create = () => {
     uploadTask.on(
       'state_changed',
       (snapshot) => {
+        //* Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded -- For progress bar...
         const uploadProgress =
           (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
         setProgress(uploadProgress);
@@ -123,9 +126,9 @@ const Create = () => {
           description: description,
         };
 
-        await setDoc(doc(fireStoreDb, 'videos', `${Date.now()}`), data);
+        await setDoc(doc(firestoreDb, 'videos', `${Date.now()}`), data);
         setLoading(false);
-        Navigate('/', { replace: true });
+        navigate('/', { replace: true });
       }
     } catch (error) {
       console.log(error);

@@ -21,7 +21,7 @@ const Login = () => {
     //* de-structure and pull refreshToken and providerData from user
     const { refreshToken, providerData } = user;
 
-    //* Set the refresh token and user data to localStorage for retrieval later.
+    //* Push the refresh token and user data to localStorage for retrieval later.
     localStorage.setItem('user', JSON.stringify(providerData));
     localStorage.setItem('accessToken', JSON.stringify(refreshToken));
 
@@ -61,7 +61,7 @@ const Login = () => {
             fontSize={18}
             colorScheme='whiteAlpha'
             shadow={'lg'}
-            //* Login to provider Google
+            //* Login to provider (Google)
             onClick={() => login()}
           >
             SignIn with Google

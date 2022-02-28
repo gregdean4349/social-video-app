@@ -7,7 +7,6 @@ import { fetchUser, userAccessToken } from './utils/fetchUser';
 const App = () => {
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
-  const [userInfo] = fetchUser();
 
   useEffect(() => {
     const accessToken = userAccessToken();
@@ -16,9 +15,10 @@ const App = () => {
       navigate('/login', { replace: true });
     } else {
       //* Push userInfo to State
+      const [userInfo] = fetchUser();
       setUser(userInfo);
     }
-  }, [navigate, userInfo]);
+  }, [navigate]);
   return (
     <Routes>
       <Route path='login' element={<Login />} />
