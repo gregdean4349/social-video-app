@@ -1,0 +1,19 @@
+{
+  "editor.minimap.enabled": false,
+  "workbench.productIconTheme": "fluent-icons",
+  "editor.fontFamily": "Fira Code, 'Courier New', monospace",
+  "editor.tabSize": 2,
+  "editor.renderWhitespace": "all",
+  "editor.wordWrap": "on",
+  "cSpell.words": [
+    "chakra",
+    "Firestore",
+    "initialcolor",
+    "musicbg",
+    "screenfull",
+    "semibold",
+    "textnodes",
+    "tinymce"
+  ],
+  "cSpell.language": "en,en-US"
+}

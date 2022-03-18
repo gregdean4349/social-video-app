@@ -59,6 +59,7 @@ const Login = () => {
           <Button
             leftIcon={<FcGoogle />}
             fontSize={18}
+            color={'#f1f1f1'}
             colorScheme='whiteAlpha'
             shadow={'lg'}
             //* Login to provider (Google)

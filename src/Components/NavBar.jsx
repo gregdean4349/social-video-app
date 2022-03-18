@@ -1,7 +1,7 @@
 import React from 'react';
 import logo_dark from '../img/logo_dark.png';
 import logo_light from '../img/logo.png';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {
   Flex,
   Image,
@@ -21,6 +21,7 @@ const NavBar = ({ user }) => {
   //* Dark & Light Mode Toggle
   const { colorMode, toggleColorMode } = useColorMode();
   const bg = useColorModeValue('gray.600', 'gray.300');
+  const navigate = useNavigate();
 
   return (
     <Flex
@@ -96,12 +97,18 @@ const NavBar = ({ user }) => {
             />
           </MenuButton>
           <MenuList shadow={'lg'}>
-            <Link to={''}>
-              {' '}
-              {/* //! Link to Needed Here!!! */}
+            <Link to={`/userDetail/${user?.uid}`}>
               <MenuItem>My Account</MenuItem>
             </Link>
-            <MenuItem flexDirection={'row'} gap={'4'} alignItems={'center'}>
+            <MenuItem
+              flexDirection={'row'}
+              gap={'4'}
+              alignItems={'center'}
+              onClick={() => {
+                localStorage.clear();
+                navigate('/login', { replace: true });
+              }}
+            >
               Logout <IoLogOut fontSize={25} />
             </MenuItem>
           </MenuList>

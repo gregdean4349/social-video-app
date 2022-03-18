@@ -2,11 +2,13 @@
 import { Flex, Image, Text, useColorModeValue } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-// Utility function getUserInfo
+
+//* Utility function getUserInfo
 import { getUserInfo } from '../utils/fetchData';
 import { getFirestore } from 'firebase/firestore';
 import { firebaseApp } from '../firebase-config';
 import moment from 'moment';
+import { MdUnsubscribe } from 'react-icons/md';
 
 const VideoPin = ({ data }) => {
   //* Dark & Light Mode Toggle
@@ -17,23 +19,28 @@ const VideoPin = ({ data }) => {
   const [userInfo, setUserInfo] = useState(null);
   const [userId, setUserId] = useState(null);
 
+  const avatar =
+    'https://lh3.googleusercontent.com/a-/AOh14GgwCCGGm7UIfAfbZKf_kQFXMFA8lDgQnh0f7XcEgQ=s96-c';
+
   useEffect(() => {
+    const controller = new AbortController();
     if (data) setUserId(data?.userId);
     if (userId)
       //* get user information for videoPin posted by
       getUserInfo(firestoreDb, userId).then((data) => {
         setUserInfo(data);
       });
+    return () => controller.abort(); // TODO remove abort controller if necessary
   }, [userId, data, firestoreDb]);
 
   return (
     <Flex
-      justifyContent={'space-between'}
-      alignItems={'center'}
+      justify={'space-between'}
+      align={'center'}
       direction={'column'}
       cursor={'pointer'}
       shadow={'lg'}
-      _hover={{ shadow: 'xl', border: '1px solid' }}
+      _hover={{ shadow: 'xl', border: '1px solid gray' }}
       overflow={'hidden'}
       position={'relative'}
       maxWidth={'300px'}
@@ -63,7 +70,7 @@ const VideoPin = ({ data }) => {
           </Text>
           <Link to={`/userDetail/${userId}`}>
             <Image
-              src={userInfo?.photoURL}
+              src={userInfo ? userInfo?.photoURL : avatar}
               rounded={'full'}
               height={'50px'}
               width={'50px'}
@@ -73,6 +80,9 @@ const VideoPin = ({ data }) => {
             />
           </Link>
         </Flex>
+
+        {/* Moment Time Configuration */}
+
         <Text fontSize={12} textColor={'textColor'} ml={'auto'}>
           {moment(new Date(parseInt(data?.id)).toISOString()).fromNow()}
         </Text>

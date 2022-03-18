@@ -351,7 +351,7 @@ const Create = () => {
           loadingText='Uploading'
           colorScheme={'linkedin'}
           variant={`${loading ? 'outline' : 'solid'}`}
-          width={'xl'}
+          width={'full'}
           _hover={{ shadow: 'lg' }}
           fontSize={20}
           padding={2}
