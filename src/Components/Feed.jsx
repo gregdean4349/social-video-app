@@ -31,10 +31,11 @@ const Feed = () => {
     }
   }, [firestoreDb, categoryId]);
 
-  //* Show Not Found page if no videos
-
   if (loading) return <Spinner msg={'Loading your Feeds...'} />;
-  // if (!feeds.length > 0) return <NotFound />;
+
+  //* Show Not Found page if no videos
+  if (!feeds?.length > 0) return <NotFound />;
+
   return (
     <SimpleGrid
       minChildWidth='300px'
